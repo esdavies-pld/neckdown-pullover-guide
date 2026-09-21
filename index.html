@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<title>Neckdown Pullover, Size Large</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#F2F3EF; --surface:#FFFFFF; --ink:#1E2229; --muted:#5C6470;
+  --accent:#33507A; --accent-soft:#E3E9F2; --ochre:#A9741D; --ochre-soft:#F6EEDC;
+  --rule:#D6D9D2; --rule-strong:#B9BDB5; --code-bg:#E9EBE6; --warn:#8A3B2E; --warn-soft:#F5E4E0;
+  --display:'Fraunces',Georgia,'Times New Roman',serif;
+  --body:'Source Sans 3','Helvetica Neue',Arial,sans-serif;
+  --mono:'IBM Plex Mono',Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#15181D; --surface:#1E2229; --ink:#E8E9E4; --muted:#9AA1AB;
+    --accent:#8FB0DC; --accent-soft:#25334A; --ochre:#D9A441; --ochre-soft:#3A2F17;
+    --rule:#2F343C; --rule-strong:#454B55; --code-bg:#272C34; --warn:#E39584; --warn-soft:#3D2420;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#15181D; --surface:#1E2229; --ink:#E8E9E4; --muted:#9AA1AB;
+  --accent:#8FB0DC; --accent-soft:#25334A; --ochre:#D9A441; --ochre-soft:#3A2F17;
+  --rule:#2F343C; --rule-strong:#454B55; --code-bg:#272C34; --warn:#E39584; --warn-soft:#3D2420;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--ochre);outline-offset:2px}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:2.6rem;font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.75rem;margin-top:.25rem}
+h3{font-size:1.25rem;margin:1.75rem 0 .5rem}
+h4{font-family:var(--body);font-size:1rem;font-weight:600;margin:1.25rem 0 .35rem}
+p{margin:0 0 1rem}
+.eyebrow{font-family:var(--body);font-size:.78rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+code,.mono{font-family:var(--mono);font-size:.92em}
+code{background:var(--code-bg);padding:.1em .35em;border-radius:3px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+.shell{display:grid;grid-template-columns:1fr;gap:0;max-width:1180px;margin:0 auto;padding:0 1.25rem 4rem}
+@media (min-width:1000px){.shell{grid-template-columns:220px minmax(0,1fr);gap:3rem}}
+nav.toc{display:none}
+@media (min-width:1000px){
+  nav.toc{display:block;position:sticky;top:0;align-self:start;padding-top:3.2rem;max-height:100vh;overflow-y:auto}
+  nav.toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--rule)}
+  nav.toc li a{display:block;padding:.3rem 0 .3rem .9rem;color:var(--muted);text-decoration:none;font-size:.9rem;border-left:2px solid transparent;margin-left:-1px}
+  nav.toc li a:hover{color:var(--ink);border-left-color:var(--rule-strong)}
+  nav.toc li.sub a{padding-left:1.6rem;font-size:.85rem}
+  nav.toc .eyebrow{display:block;margin-bottom:.6rem}
+}
+main{max-width:68ch;min-width:0}
+
+header.hero{padding:3.2rem 0 2rem;border-bottom:1px solid var(--rule-strong);margin-bottom:2rem}
+header.hero .eyebrow{margin-bottom:.6rem;display:block}
+header.hero p.lede{font-size:1.15rem;color:var(--muted);margin:1rem 0 0;max-width:58ch}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem 1.5rem;margin-top:1.75rem}
+.facts div{border-top:2px solid var(--accent);padding-top:.5rem}
+.facts dt{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.facts dd{margin:.15rem 0 0;font-family:var(--display);font-size:1.4rem;font-weight:600}
+.facts dd small{font-family:var(--body);font-size:.85rem;color:var(--muted);font-weight:400}
+
+section{padding:1.5rem 0 1rem;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+.sec-head{display:flex;align-items:baseline;gap:.9rem;margin-bottom:1rem}
+.sec-head .stepno{font-family:var(--mono);color:var(--ochre);font-size:.95rem;font-weight:500;flex:none}
+
+.note{background:var(--accent-soft);border-radius:6px;padding:.9rem 1.1rem;margin:1rem 0}
+.note p:last-child{margin-bottom:0}
+.note .eyebrow{display:block;margin-bottom:.3rem}
+.warn{background:var(--warn-soft)}
+.warn .eyebrow{color:var(--warn)}
+
+.check{background:var(--ochre-soft);border-left:3px solid var(--ochre);padding:.75rem 1rem;margin:1rem 0;border-radius:0 6px 6px 0}
+.check .eyebrow{color:var(--ochre);display:block;margin-bottom:.4rem}
+.check .row{display:flex;flex-wrap:wrap;gap:.35rem 1.4rem}
+.check .row span{font-size:.9rem;color:var(--muted)}
+.check .row b{font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums;color:var(--ink);margin-left:.35rem}
+.check p{margin:.5rem 0 0;font-size:.92rem}
+
+table{border-collapse:collapse;width:100%;font-size:.95rem;margin:.75rem 0 1.25rem}
+.tw{overflow-x:auto}
+th,td{text-align:left;padding:.45rem .6rem;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;border-bottom:1px solid var(--rule-strong)}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+tr.hl td{background:var(--ochre-soft)}
+
+ol.steps{padding-left:1.4rem;margin:.5rem 0 1rem}
+ol.steps li{margin-bottom:.55rem;padding-left:.2rem}
+ul{padding-left:1.3rem}
+ul li{margin-bottom:.35rem}
+dl.gloss{margin:0}
+dl.gloss dt{font-weight:600;margin-top:.9rem}
+dl.gloss dt .tag{font-family:var(--body);font-size:.7rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.1rem .4rem;border-radius:3px;margin-left:.5rem;vertical-align:middle}
+.tag.now{background:var(--accent-soft);color:var(--accent)}
+.tag.later{background:var(--code-bg);color:var(--muted)}
+dl.gloss dd{margin:.2rem 0 0}
+
+figure{margin:1.25rem 0;padding:1rem;background:var(--surface);border:1px solid var(--rule);border-radius:6px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-size:.85rem;color:var(--muted);margin-top:.6rem}
+svg text{font-family:var(--mono);fill:var(--ink)}
+svg .lbl{font-family:var(--body);fill:var(--muted);font-size:9px}
+svg .seg{fill:var(--surface);stroke:var(--ink);stroke-width:1.2}
+svg .seg.back{fill:var(--accent-soft)}
+svg .mk{stroke:var(--ochre);stroke-width:2}
+svg .dim{stroke:var(--muted);stroke-width:.8}
+svg .body{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.2}
+svg .rib{fill:none;stroke:var(--accent);stroke-width:.8;stroke-dasharray:2 2}
+
+.stepchk{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--muted);margin:0 0 .75rem;user-select:none}
+.stepchk input{width:1.05rem;height:1.05rem;accent-color:var(--accent);margin:0}
+.done > .sec-head h2{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--rule-strong)}
+
+.card{background:var(--surface);border:1px solid var(--rule-strong);border-radius:8px;padding:1.25rem 1.4rem;margin:1rem 0}
+.card h3{margin-top:0}
+.card .grid{display:grid;grid-template-columns:1fr 1fr;gap:.2rem 1.5rem;font-size:.95rem}
+.card .grid div{display:flex;justify-content:space-between;gap:1rem;border-bottom:1px dotted var(--rule);padding:.3rem 0}
+.card .grid div b{font-family:var(--mono);font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:560px){.card .grid{grid-template-columns:1fr}}
+.card h4{margin:1rem 0 .3rem;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+footer.colophon{font-size:.85rem;color:var(--muted);margin-top:2rem;padding-top:1rem;border-top:1px solid var(--rule)}
+@media print{
+  body{background:#fff;color:#000;font-size:11pt}
+  nav.toc,.stepchk{display:none!important}
+  .shell{grid-template-columns:1fr;padding:0}
+  section{break-inside:auto}
+  .card,.check,.note,figure{break-inside:avoid}
+  a{color:inherit;text-decoration:none}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+
+<div class="shell">
+<nav class="toc" aria-label="Contents">
+  <span class="eyebrow">Contents</span>
+  <ol>
+    <li><a href="#overview">What you're making</a></li>
+    <li><a href="#shopping">Shopping list</a></li>
+    <li><a href="#skills">Skills &amp; glossary</a></li>
+    <li><a href="#gauge">Gauge swatch</a></li>
+    <li><a href="#step1">1 · Cast on at the neck</a></li>
+    <li><a href="#step2">2 · Shape the back neck</a></li>
+    <li><a href="#step3">3 · Join into the round</a></li>
+    <li><a href="#step4">4 · Raglan yoke</a></li>
+    <li><a href="#step5">5 · Divide for sleeves</a></li>
+    <li><a href="#step6">6 · Body</a></li>
+    <li><a href="#step7">7 · Sleeves</a></li>
+    <li><a href="#step8">8 · Neckband</a></li>
+    <li><a href="#step9">9 · Finishing</a></li>
+    <li><a href="#fit">Fit adjustments</a></li>
+    <li><a href="#trouble">Troubleshooting</a></li>
+    <li><a href="#card">Reference card</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero">
+  <span class="eyebrow">Beginner's guide · Knitting Pure &amp; Simple #991</span>
+  <h1>Neckdown Pullover for Men</h1>
+  <p class="lede">A seamless, top-down raglan sweater knitted in one piece from the neck to the hem. Every number below is already worked out for <strong>size Large</strong> (50-inch chest), with stitch counts to check at each stage so you always know you're on track.</p>
+  <dl class="facts">
+    <div><dt>Finished chest</dt><dd>50 in</dd></div>
+    <div><dt>Finished length</dt><dd>27 in</dd></div>
+    <div><dt>Yarn</dt><dd>1,260 yd <small>worsted</small></dd></div>
+    <div><dt>Gauge</dt><dd>16 sts <small>= 4 in</small></dd></div>
+    <div><dt>Main needle</dt><dd>US 9 <small>(5.5 mm)</small></dd></div>
+  </dl>
+</header>
+
+<section id="overview">
+  <div class="sec-head"><h2>What you're making</h2></div>
+  <p>This is a classic crew-neck pullover with <em>raglan</em> sleeves: the diagonal lines running from the neck down to the underarm. It is knitted <strong>from the top down and in one piece</strong>, which makes it one of the friendliest first sweaters:</p>
+  <ul>
+    <li><strong>No seams.</strong> There is nothing to sew together at the end.</li>
+    <li><strong>You can try it on as you go.</strong> Slip it over the wearer's head once the yoke is done and check the fit before committing to sleeve or body length.</li>
+    <li><strong>Almost all of it is plain knitting in the round.</strong> Once the neck is joined, you knit every stitch of every round, with a simple increase at four fixed points.</li>
+  </ul>
+  <p>The order of work is: neck → a few flat rows to raise the back of the neck → join and knit the yoke in the round, growing at the four raglan lines → park the sleeve stitches on scrap yarn → knit the body straight down → knit each sleeve → pick up stitches and knit the neckband last.</p>
+
+  <figure>
+    <svg viewBox="0 0 360 215" role="img" aria-label="Schematic of the finished sweater, size Large, with measurements">
+      <!-- body -->
+      <path class="body" d="M140 40 Q180 58 220 40 L245 95 L245 180 L115 180 L115 95 Z"/>
+      <!-- back neck line -->
+      <path d="M140 40 Q180 28 220 40" fill="none" stroke="var(--accent)" stroke-width="1.2"/>
+      <!-- sleeves -->
+      <path class="body" d="M140 40 L122 34 L64 116 L88 133 L115 95 Z"/>
+      <path class="body" d="M220 40 L238 34 L296 116 L272 133 L245 95 Z"/>
+      <!-- ribbing -->
+      <line x1="115" y1="167" x2="245" y2="167" class="rib"/>
+      <line x1="71.5" y1="105.3" x2="95.5" y2="122.3" class="rib"/>
+      <line x1="288.5" y1="105.3" x2="264.5" y2="122.3" class="rib"/>
+      <!-- chest dimension -->
+      <line x1="115" y1="194" x2="245" y2="194" class="dim"/>
+      <line x1="115" y1="189" x2="115" y2="199" class="dim"/><line x1="245" y1="189" x2="245" y2="199" class="dim"/>
+      <text x="180" y="207" text-anchor="middle" font-size="9">chest 50 in around (204 sts)</text>
+      <!-- length dimension -->
+      <line x1="258" y1="40" x2="258" y2="180" class="dim"/>
+      <line x1="253" y1="40" x2="263" y2="40" class="dim"/><line x1="253" y1="180" x2="263" y2="180" class="dim"/>
+      <text x="263" y="150" font-size="9">27 in</text>
+      <!-- yoke depth -->
+      <line x1="150" y1="40" x2="150" y2="95" class="dim"/>
+      <line x1="145" y1="40" x2="155" y2="40" class="dim"/><line x1="145" y1="95" x2="155" y2="95" class="dim"/>
+      <text x="155" y="80" font-size="9">yoke ≈10½ in</text>
+      <!-- labels -->
+      <text x="180" y="128" text-anchor="middle" font-size="9">body 24½ in</text>
+      <text x="180" y="140" text-anchor="middle" font-size="9">+ 2½ in rib</text>
+      <text x="281" y="86" font-size="9" transform="rotate(55 281 86)">sleeve 17 in + 2½ in rib</text>
+      <text x="180" y="16" text-anchor="middle" class="lbl">back neck sits higher than front neck</text>
+    </svg>
+    <figcaption>Finished measurements for size Large. Upper arm is about 22 inches (90 sts), a relaxed, classic fit.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="eyebrow">Who this size fits</span>
+    <p>50 inches is the <em>finished</em> chest of the sweater. It's designed to be worn with roughly 8–10 inches of ease, so it suits a man with an actual chest measurement of about 40–42 inches who likes a comfortable, slightly roomy pullover. If the wearer measures 44 inches or more, consider the X-Large pattern numbers instead.</p>
+  </div>
+</section>
+
+<section id="shopping">
+  <div class="sec-head"><h2>Shopping list</h2></div>
+  <h3>Yarn</h3>
+  <p><strong>1,260 yards of medium-to-heavy worsted weight yarn</strong> (yarn-weight category 4, sometimes labelled "aran" or "heavy worsted"). Buy <strong>one extra skein</strong>: running short in the last sleeve is the most common beginner heartbreak, and unopened skeins can usually be returned.</p>
+  <ul>
+    <li>Check every skein has the <strong>same dye lot</strong> number on the label. Different lots can differ subtly in shade.</li>
+    <li>Wool or a wool blend is the most forgiving for a first sweater: it stretches, blocks beautifully, and hides small tension wobbles. A tweedy, heathered yarn (like the oatmeal in the original photo) hides them even better.</li>
+    <li>Avoid slippery yarns (pure cotton, silk, bamboo) and very dark colours for a first project; both make it hard to see your stitches.</li>
+  </ul>
+  <h3>Needles</h3>
+  <p>This guide uses the <strong>magic loop</strong> method throughout, so the whole sweater needs just two needles:</p>
+  <div class="tw"><table>
+    <tr><th>Needle</th><th>Size</th><th>Used for</th></tr>
+    <tr><td>32- or 40-inch circular</td><td class="n">US 9 (5.5 mm)</td><td>Everything in stockinette: yoke, body, both sleeves top to bottom</td></tr>
+    <tr><td>32- or 40-inch circular</td><td class="n">US 6 (4 mm)</td><td>Everything ribbed: hem, cuffs, neckband</td></tr>
+  </table></div>
+  <p>The original pattern lists six needles (24-inch and 16-inch circulars plus double-points in each size) because a circular needle normally only works when the tube you're knitting is <em>bigger</em> around than the needle, so it steps down to shorter needles as the sleeve narrows. <strong>Magic loop</strong> reverses that: you use a needle that is far too long and pull the spare cable out through the middle of the stitches in a loop, knitting half the round on each tip. The tube can then be any size, so one long needle handles the 204-stitch body and the 44-stitch cuff alike. For a beginner it has real advantages: two needle tips instead of five loose double-points, no stitches sliding off needle ends, and only two needle changes per round, so no vertical "ladders".</p>
+  <p>Buy a needle with a <strong>supple, smooth cable and a seamless join</strong>; a stiff cable makes magic loop miserable. Modern interchangeable sets (ChiaoGoo, HiyaHiya, Knit Picks and similar) are designed for it, and let you swap the US 9 and US 6 tips onto the same cable.</p>
+  <p>These are the sizes the designer used; <strong>you will use whatever size gives you the right gauge</strong> (see <a href="#gauge">Gauge swatch</a>). If you get gauge on a US 10, you'll use US 10 and US 7 throughout.</p>
+  <h3>Notions</h3>
+  <ul>
+    <li><strong>Stitch markers</strong>: at least 5, with one in a different colour (it marks the start of each round).</li>
+    <li><strong>Scrap yarn</strong> in a contrasting colour, about 2 yards, for holding sleeve stitches.</li>
+    <li><strong>Blunt darning needle</strong> (tapestry needle) for moving stitches and weaving in ends.</li>
+    <li>Tape measure, scissors, and a row counter or a pencil and notepad.</li>
+  </ul>
+</section>
+
+<section id="skills">
+  <div class="sec-head"><h2>Skills &amp; glossary</h2></div>
+  <p>Everything in this sweater uses the techniques below. Those tagged <span class="tag now">learn first</span> you need from the very first row; practise them on your gauge swatch. Those tagged <span class="tag later">learn when you get there</span> aren't needed until later and are easier to learn with the sweater in your hands. A two-minute video for any of these is one search away; the names here are the standard ones to search for.</p>
+  <dl class="gloss">
+    <dt>Long-tail cast on <span class="tag now">learn first</span></dt>
+    <dd>Makes the first row of stitches. Leave a tail about 3 times the width of the finished edge; for the 61-stitch neck, a 40-inch tail is plenty.</dd>
+    <dt>Knit (k) and purl (p) <span class="tag now">learn first</span></dt>
+    <dd>The two basic stitches. Everything else is a variation.</dd>
+    <dt>Stockinette stitch <span class="tag now">learn first</span></dt>
+    <dd>The smooth "V" fabric of a classic sweater. <strong>Flat</strong> (back and forth): knit one row, purl the next. <strong>In the round</strong>: simply knit every round. The pattern uses both, briefly flat at the back neck and then in the round for everything else.</dd>
+    <dt>1 × 1 rib <span class="tag now">learn first</span></dt>
+    <dd>The stretchy edging on cuffs, hem and neck: <code>k1, p1</code> repeated. On the next row or round, knit the stitches that look like knits (a "V") and purl the ones that look like purls (a bump). Move the yarn to the back before a knit and to the front before a purl, or you'll make accidental extra stitches.</dd>
+    <dt>kfb, "knit front and back" (the pattern calls this <em>inc</em>) <span class="tag now">learn first</span></dt>
+    <dd>The only increase used. Knit into the stitch as normal but don't slide it off; swing the right needle round to the back and knit into the back loop of the same stitch, then slide it off. One stitch becomes two. It leaves a small purl bump, which is what forms the decorative raglan line.</dd>
+    <dt>Slip marker (sm) <span class="tag now">learn first</span></dt>
+    <dd>When you reach a stitch marker, just move it from the left needle to the right needle and carry on. Never knit it.</dd>
+    <dt>Joining in the round <span class="tag later">learn when you get there</span></dt>
+    <dd>Bringing the two ends of a row together so you knit in a spiral. The only rule: <strong>make sure the cast-on edge is not twisted around the needle</strong> before you knit the first stitch. Lay the needle on a table and check the bumpy edge faces inward all the way round. A twist can't be fixed later.</dd>
+    <dt>Backward-loop (e-wrap) cast on <span class="tag later">learn when you get there</span></dt>
+    <dd>A quick way to add stitches in the middle of your work: twist a loop of working yarn onto the right needle. Used to add 13 stitches at the front neck and 10 under each arm. The <em>cable cast on</em> is a firmer alternative if you already know it.</dd>
+    <dt>Placing stitches on hold <span class="tag later">learn when you get there</span></dt>
+    <dd>Thread scrap yarn on the darning needle and pass it through each stitch as you slide it off the knitting needle. Tie the ends of the scrap yarn loosely. The stitches wait safely until you come back for the sleeves.</dd>
+    <dt>ssk, "slip, slip, knit" <span class="tag later">learn when you get there</span></dt>
+    <dd>A decrease that leans left. Slip one stitch as if to knit, slip the next as if to purl, then put the left needle through the front of both and knit them together. Two stitches become one.</dd>
+    <dt>k2tog, "knit two together" <span class="tag later">learn when you get there</span></dt>
+    <dd>A decrease that leans right. Put the needle through two stitches at once and knit them as one. Paired with ssk on the sleeves so the seam line looks symmetrical.</dd>
+    <dt>Picking up stitches <span class="tag later">learn when you get there</span></dt>
+    <dd>Making new live stitches along a finished edge by poking the needle through the fabric and pulling a loop of yarn through. Used for the underarms and the neckband. Pick up one full stitch in from the edge so the join is tidy.</dd>
+    <dt>Magic loop <span class="tag later">learn when you get there</span></dt>
+    <dd>Knitting a small tube on a long circular needle. Divide the stitches in half, pull the cable out between the two halves so it forms a loop, knit the half on the front tip, then turn the work, pull the cable through and knit the other half. You need it from the moment you start a sleeve (Step 7); the body is big enough to knit as a plain round. Keep the two "gap" points snug and shift them by a few stitches now and then so no loose column forms.</dd>
+    <dt>Binding off loosely <span class="tag later">learn when you get there</span></dt>
+    <dd>Finishing the edge so it can't unravel. <strong>Loosely matters</strong> at the neck (it has to stretch over a head) and at the hem and cuffs. Use a needle two sizes larger for the bind-off row, or learn the "stretchy bind off" (k2tog through the back loop).</dd>
+    <dt>Weaving in ends and blocking <span class="tag later">learn when you get there</span></dt>
+    <dd>Hiding yarn tails inside the fabric with the darning needle, then washing and laying the sweater flat to dry to even out the stitches.</dd>
+  </dl>
+
+  <h3>How to read the abbreviations</h3>
+  <div class="tw"><table>
+    <tr><th>Pattern says</th><th>It means</th></tr>
+    <tr><td><code>k</code>, <code>p</code></td><td>knit, purl</td></tr>
+    <tr><td><code>st</code>, <code>sts</code></td><td>stitch, stitches</td></tr>
+    <tr><td><code>inc</code></td><td>increase by knitting into the front and back of the next stitch (kfb)</td></tr>
+    <tr><td><code>ssk</code></td><td>slip, slip, knit those two together (left-leaning decrease)</td></tr>
+    <tr><td><code>k2tog</code></td><td>knit two together (right-leaning decrease)</td></tr>
+    <tr><td><code>*…*</code>, <code>rep</code></td><td>repeat the instructions between the asterisks</td></tr>
+    <tr><td><code>RS</code>, <code>WS</code></td><td>right side (the outside of the sweater), wrong side (the inside)</td></tr>
+    <tr><td>“k to within 1 st of marker”</td><td>knit until exactly one stitch remains before the marker</td></tr>
+  </table></div>
+</section>
+
+<section id="gauge">
+  <div class="sec-head"><h2>Gauge swatch: don't skip this</h2></div>
+  <p><strong>Gauge</strong> is how many stitches you make per inch. The whole sweater is calculated on <strong>16 stitches = 4 inches</strong> (4 stitches per inch) in stockinette on the larger needle. If your knitting is even a little tighter or looser, the sweater comes out a different size:</p>
+  <div class="tw"><table>
+    <tr><th>Your swatch measures</th><th class="n">Sts per inch</th><th class="n">Body 204 sts becomes</th><th>Fix</th></tr>
+    <tr><td>15 sts in 4 in</td><td class="n">3.75</td><td class="n">54½ in chest</td><td>go <strong>down</strong> one needle size</td></tr>
+    <tr class="hl"><td>16 sts in 4 in</td><td class="n">4.00</td><td class="n">51 in chest</td><td>correct, use this needle</td></tr>
+    <tr><td>17 sts in 4 in</td><td class="n">4.25</td><td class="n">48 in chest</td><td>go <strong>up</strong> one needle size</td></tr>
+    <tr><td>18 sts in 4 in</td><td class="n">4.50</td><td class="n">45 in chest</td><td>go up two needle sizes</td></tr>
+  </table></div>
+  <ol class="steps">
+    <li>With the US 9 needle, cast on 26 stitches.</li>
+    <li>Work stockinette flat (knit a row, purl a row) until the piece is about 5 inches tall. Bind off.</li>
+    <li><strong>Wash it the way you'll wash the sweater</strong> and let it dry flat. Yarn relaxes when washed and the sweater will too.</li>
+    <li>Lay it flat without stretching. Place a ruler across the middle (not at the edges) and count the stitches in 4 inches. Count half-stitches too.</li>
+    <li>Not 16? Change needle size and knit another swatch. Two swatches take an evening; a sweater that doesn't fit takes a month.</li>
+  </ol>
+  <p>While the swatch is out, count <strong>rows</strong> in 4 inches as well and write it down. The pattern never gives a row gauge (it measures length in inches instead), but knowing yours helps you plan the sleeve decreases in Step 7. Most knitters get roughly 22–24 rows in 4 inches with this yarn; this guide assumes about <strong>6 rounds per inch</strong> where it estimates round counts.</p>
+  <div class="note">
+    <span class="eyebrow">Flat swatch, round sweater</span>
+    <p>The pattern's gauge is measured knitting in the round, and many knitters purl a touch looser than they knit, so a flat swatch can read slightly different. For a beginner a flat swatch is fine. A belt-and-braces check: once the yoke is joined (Step 3), measure your gauge again directly on the sweater after 3 inches. It's early enough to restart painlessly if it's off.</p>
+  </div>
+</section>
+
+<section id="step1">
+  <div class="sec-head"><span class="stepno">STEP 1</span><h2>Cast on at the neck</h2></div>
+  <label class="stepchk"><input type="checkbox" data-step="step1"> Mark this step done</label>
+  <p>Use the <strong>US 9 long circular</strong>. You'll cast on 61 stitches in five groups, placing a stitch marker between each group. Cast on firmly; this edge becomes the neck opening and a loose one stretches out.</p>
+  <figure>
+    <svg viewBox="0 0 360 96" role="img" aria-label="Neck cast-on: 2, 15, 27, 15, 2 stitches with a marker between each group">
+      <rect class="seg" x="10" y="30" width="12" height="30"/>
+      <rect class="seg" x="22" y="30" width="80" height="30"/>
+      <rect class="seg back" x="102" y="30" width="146" height="30"/>
+      <rect class="seg" x="248" y="30" width="80" height="30"/>
+      <rect class="seg" x="328" y="30" width="12" height="30"/>
+      <line class="mk" x1="22" y1="24" x2="22" y2="66"/><line class="mk" x1="102" y1="24" x2="102" y2="66"/>
+      <line class="mk" x1="248" y1="24" x2="248" y2="66"/><line class="mk" x1="328" y1="24" x2="328" y2="66"/>
+      <text x="16" y="50" text-anchor="middle" font-size="10">2</text>
+      <text x="62" y="50" text-anchor="middle" font-size="10">15</text>
+      <text x="175" y="50" text-anchor="middle" font-size="10">27</text>
+      <text x="288" y="50" text-anchor="middle" font-size="10">15</text>
+      <text x="334" y="50" text-anchor="middle" font-size="10">2</text>
+      <text x="16" y="80" text-anchor="middle" class="lbl">front</text>
+      <text x="62" y="80" text-anchor="middle" class="lbl">right sleeve</text>
+      <text x="175" y="80" text-anchor="middle" class="lbl">back of neck</text>
+      <text x="288" y="80" text-anchor="middle" class="lbl">left sleeve</text>
+      <text x="334" y="80" text-anchor="middle" class="lbl">front</text>
+      <text x="22" y="16" text-anchor="middle" class="lbl">marker</text>
+      <text x="102" y="16" text-anchor="middle" class="lbl">marker</text>
+      <text x="248" y="16" text-anchor="middle" class="lbl">marker</text>
+      <text x="328" y="16" text-anchor="middle" class="lbl">marker</text>
+    </svg>
+    <figcaption>The 61 cast-on stitches, seen from the outside of the sweater. The markers are the four raglan lines. The two tiny 2-stitch groups are the beginnings of the front; the rest of the front neck is cast on later, in Step 3.</figcaption>
+  </figure>
+  <ol class="steps">
+    <li>Cast on <span class="num">2</span> stitches. Place a marker.</li>
+    <li>Cast on <span class="num">15</span> stitches. Place a marker.</li>
+    <li>Cast on <span class="num">27</span> stitches. Place a marker.</li>
+    <li>Cast on <span class="num">15</span> stitches. Place a marker.</li>
+    <li>Cast on <span class="num">2</span> stitches.</li>
+  </ol>
+  <p><strong>Do not join into a round.</strong> For the next few rows you'll knit back and forth like a scarf.</p>
+  <div class="check"><span class="eyebrow">Stitch check</span>
+    <div class="row"><span>Front<b>2</b></span><span>Sleeve<b>15</b></span><span>Back<b>27</b></span><span>Sleeve<b>15</b></span><span>Front<b>2</b></span><span>Total<b>61</b></span></div>
+  </div>
+</section>
+
+<section id="step2">
+  <div class="sec-head"><span class="stepno">STEP 2</span><h2>Shape the back neck (flat rows)</h2></div>
+  <label class="stepchk"><input type="checkbox" data-step="step2"> Mark this step done</label>
+  <p>The designer warns that these first rows "may be confusing", and she's right, so here's what is happening: on a real sweater the back of the neck sits higher than the front. You create that by knitting a few rows <em>only</em> across the back and sleeves before the front neck stitches even exist. Each right-side row grows the work by 10 stitches: one at each end of the row and one on <em>both sides</em> of every marker.</p>
+  <p>You'll work 9 rows in total: five increase rows (rows 1, 3, 5, 7, 9) with a plain purl row between each.</p>
+
+  <h4>Row 1 (right side): increase row</h4>
+  <ol class="steps">
+    <li>kfb into the first stitch, then kfb into the next stitch (that's the last stitch before the first marker).</li>
+    <li>Slip the marker. kfb into the stitch right after it.</li>
+    <li>Knit along until <strong>one stitch remains before the next marker</strong>. kfb into that stitch. Slip the marker. kfb into the next stitch.</li>
+    <li>Repeat step 3 at each remaining marker.</li>
+    <li>After the last marker: kfb, then kfb into the very last stitch.</li>
+  </ol>
+  <p>That's 10 increases: one in the first stitch, two at each of the four markers, and one in the last stitch. (With only 2 stitches in each front group, the "stitch before the first marker" is simply the second stitch of the row, so the row starts kfb, kfb, slip marker, kfb.) The simplest way to hold it in your head: <strong>kfb in the first stitch, kfb in the last stitch, and kfb in the stitch on each side of every marker.</strong></p>
+
+  <h4>Row 2 (wrong side)</h4>
+  <p>Purl every stitch, slipping the markers as you come to them.</p>
+
+  <h4>Row 3 (right side): increase row</h4>
+  <p>Exactly the same as Row 1: kfb in the first stitch; kfb in the stitch before and the stitch after every marker; kfb in the last stitch. (The pattern phrases it slightly differently but the stitches are identical.)</p>
+
+  <p>Repeat rows 2 and 3 until you have completed <strong>5 increase rows</strong> and the back section (between the second and third markers) has <strong>37 stitches</strong>. You finish on a right-side increase row.</p>
+
+  <div class="tw"><table>
+    <tr><th>After row</th><th>Type</th><th class="n">Front</th><th class="n">Sleeve</th><th class="n">Back</th><th class="n">Sleeve</th><th class="n">Front</th><th class="n">Total</th></tr>
+    <tr><td>cast on</td><td></td><td class="n">2</td><td class="n">15</td><td class="n">27</td><td class="n">15</td><td class="n">2</td><td class="n">61</td></tr>
+    <tr><td>1</td><td>increase</td><td class="n">4</td><td class="n">17</td><td class="n">29</td><td class="n">17</td><td class="n">4</td><td class="n">71</td></tr>
+    <tr><td>2</td><td>purl</td><td class="n">4</td><td class="n">17</td><td class="n">29</td><td class="n">17</td><td class="n">4</td><td class="n">71</td></tr>
+    <tr><td>3</td><td>increase</td><td class="n">6</td><td class="n">19</td><td class="n">31</td><td class="n">19</td><td class="n">6</td><td class="n">81</td></tr>
+    <tr><td>4</td><td>purl</td><td class="n">6</td><td class="n">19</td><td class="n">31</td><td class="n">19</td><td class="n">6</td><td class="n">81</td></tr>
+    <tr><td>5</td><td>increase</td><td class="n">8</td><td class="n">21</td><td class="n">33</td><td class="n">21</td><td class="n">8</td><td class="n">91</td></tr>
+    <tr><td>6</td><td>purl</td><td class="n">8</td><td class="n">21</td><td class="n">33</td><td class="n">21</td><td class="n">8</td><td class="n">91</td></tr>
+    <tr><td>7</td><td>increase</td><td class="n">10</td><td class="n">23</td><td class="n">35</td><td class="n">23</td><td class="n">10</td><td class="n">101</td></tr>
+    <tr><td>8</td><td>purl</td><td class="n">10</td><td class="n">23</td><td class="n">35</td><td class="n">23</td><td class="n">10</td><td class="n">101</td></tr>
+    <tr class="hl"><td>9</td><td>increase</td><td class="n">12</td><td class="n">25</td><td class="n">37</td><td class="n">25</td><td class="n">12</td><td class="n">111</td></tr>
+  </table></div>
+  <div class="check"><span class="eyebrow">Stitch check after row 9</span>
+    <div class="row"><span>Front<b>12</b></span><span>Sleeve<b>25</b></span><span>Back<b>37</b></span><span>Sleeve<b>25</b></span><span>Front<b>12</b></span><span>Total<b>111</b></span></div>
+    <p>Hold the work up: it should look like a wide, shallow U, deeper at the middle (the back) and with the two front edges angling up.</p>
+  </div>
+  <div class="note warn">
+    <span class="eyebrow">Common mistake</span>
+    <p>Forgetting the kfb in the first or last stitch. It's easy to remember the markers and miss the edges. If your total after an increase row is 8 more instead of 10, that's why. Just add the missed kfb on the next increase row; nobody will ever see it.</p>
+  </div>
+</section>
+
+<section id="step3">
+  <div class="sec-head"><span class="stepno">STEP 3</span><h2>Cast on the front neck and join into the round</h2></div>
+  <label class="stepchk"><input type="checkbox" data-step="step3"> Mark this step done</label>
+  <p>You've just finished row 9 and the working yarn is at the end of the row. Now you fill in the front of the neck and close the circle.</p>
+  <ol class="steps">
+    <li>With the backward-loop method, <strong>cast on 13 stitches</strong> onto the right-hand needle. You now have 124 stitches.</li>
+    <li>Lay the needle flat and check the cast-on edge runs around the inside of the circle with <strong>no twist</strong>.</li>
+    <li>Place your <strong>different-coloured marker</strong> on the right needle. This marks the beginning of every round from now on, and it sits at the centre front.</li>
+    <li>Bring the needle tips together and knit the first stitch of the left needle (this is the first stitch you cast on in Step 1). The round is joined. Give the yarn a firm tug on this first stitch to avoid a gap.</li>
+    <li><strong>Knit one full round</strong> plain, slipping all five markers.</li>
+  </ol>
+  <div class="check"><span class="eyebrow">Stitch check</span>
+    <div class="row"><span>Front (both halves + 13)<b>37</b></span><span>Sleeve<b>25</b></span><span>Back<b>37</b></span><span>Sleeve<b>25</b></span><span>Total<b>124</b></span></div>
+    <p>Front and back are now equal at 37, which is exactly how a raglan should be. If the front is not 37, recount the cast-on.</p>
+  </div>
+</section>
+
+<section id="step4">
+  <div class="sec-head"><span class="stepno">STEP 4</span><h2>Knit the raglan yoke in the round</h2></div>
+  <label class="stepchk"><input type="checkbox" data-step="step4"> Mark this step done</label>
+  <p>This is the rhythm of the sweater and it's very simple. You alternate two rounds:</p>
+  <h4>Increase round</h4>
+  <p>Knit until <strong>one stitch before a raglan marker</strong>, kfb, slip the marker, kfb. Do this at all <strong>four</strong> raglan markers. <strong>Do not increase at the beginning-of-round marker</strong> (the different-coloured one); just slip it. 8 stitches added.</p>
+  <h4>Plain round</h4>
+  <p>Knit every stitch.</p>
+  <p>Repeat these two rounds until the back section has <strong>91 stitches</strong>. That is <strong>27 increase rounds</strong> (54 rounds total). Use a row counter or tally marks; it's easy to lose your place in a plain round.</p>
+  <div class="tw"><table>
+    <tr><th class="n">Increase rounds done</th><th class="n">Front</th><th class="n">Each sleeve</th><th class="n">Back</th><th class="n">Total</th></tr>
+    <tr><td class="n">0</td><td class="n">37</td><td class="n">25</td><td class="n">37</td><td class="n">124</td></tr>
+    <tr><td class="n">5</td><td class="n">47</td><td class="n">35</td><td class="n">47</td><td class="n">164</td></tr>
+    <tr><td class="n">10</td><td class="n">57</td><td class="n">45</td><td class="n">57</td><td class="n">204</td></tr>
+    <tr><td class="n">15</td><td class="n">67</td><td class="n">55</td><td class="n">67</td><td class="n">244</td></tr>
+    <tr><td class="n">20</td><td class="n">77</td><td class="n">65</td><td class="n">77</td><td class="n">284</td></tr>
+    <tr><td class="n">25</td><td class="n">87</td><td class="n">75</td><td class="n">87</td><td class="n">324</td></tr>
+    <tr class="hl"><td class="n">27</td><td class="n">91</td><td class="n">79</td><td class="n">91</td><td class="n">340</td></tr>
+  </table></div>
+  <p>A useful rule: after any increase round, <strong>back = 37 + 2 × (increase rounds done)</strong>, and the total is 124 + 8 × (increase rounds done). If the numbers don't match, you probably missed one marker on a round; add the missing kfb next time.</p>
+  <div class="check"><span class="eyebrow">Stitch check at the end of the yoke</span>
+    <div class="row"><span>Front<b>91</b></span><span>Sleeve<b>79</b></span><span>Back<b>91</b></span><span>Sleeve<b>79</b></span><span>Total<b>340</b></span></div>
+    <p>Measured straight down from the cast-on edge at the shoulder, the yoke should be roughly 10–11 inches deep. <strong>Try it on now</strong>: the raglan lines should end right at the underarm. If they're clearly short of the armpit, work one or two more pairs of rounds (the extra stitches just make the sweater a touch roomier); if they're past it, you've probably done too many. This is the last easy point to adjust.</p>
+  </div>
+</section>
+
+<section id="step5">
+  <div class="sec-head"><span class="stepno">STEP 5</span><h2>Divide for the sleeves</h2></div>
+  <label class="stepchk"><input type="checkbox" data-step="step5"> Mark this step done</label>
+  <p>Now you park the two sleeves on scrap yarn and cast on a few stitches under each arm, so you can carry on with the body alone. Thread your darning needle with a yard of scrap yarn before you start. From here on, <strong>remove each raglan marker as you reach it</strong>; their job is done.</p>
+  <ol class="steps">
+    <li>From the beginning-of-round marker, knit across the front stitches to the first raglan marker. Remove the marker and <strong>knit 1 more stitch</strong>.</li>
+    <li>Slip the next <strong>78 stitches</strong> (everything up to the next marker) onto the scrap yarn, using the darning needle. Remove that marker. Tie the scrap yarn ends loosely. That's one sleeve on hold.</li>
+    <li>With the backward-loop method, <strong>cast on 10 stitches</strong> onto the right needle. This bridges the underarm.</li>
+    <li>Knit across the <strong>91 back stitches</strong> to the next marker. Remove it and <strong>knit 1 more stitch</strong>.</li>
+    <li>Slip the next <strong>78 stitches</strong> onto a second length of scrap yarn. Remove the last raglan marker.</li>
+    <li>Cast on 10 stitches, but this time <strong>place a marker after the 5th</strong>. This new marker is your beginning of round; it sits in the middle of the left underarm.</li>
+    <li>Knit to the old beginning-of-round marker at centre front and <strong>remove it</strong>. Keep knitting round to the new marker.</li>
+  </ol>
+  <div class="check"><span class="eyebrow">Stitch check</span>
+    <div class="row"><span>On the needle (body)<b>204</b></span><span>Each sleeve on scrap yarn<b>78</b></span></div>
+    <p>204 body stitches ÷ 4 per inch = 51 inches around. The pattern's "50-inch" finished chest is this measurement rounded; you're right on target.</p>
+  </div>
+  <div class="note">
+    <span class="eyebrow">Why "knit 1" after removing the marker?</span>
+    <p>The designer moves one stitch from each sleeve edge onto the body so the raglan line finishes cleanly at the underarm rather than being split when you rejoin the sleeve. That's why each sleeve holds 78, not 79.</p>
+  </div>
+</section>
+
+<section id="step6">
+  <div class="sec-head"><span class="stepno">STEP 6</span><h2>Body</h2></div>
+  <label class="stepchk"><input type="checkbox" data-step="step6"> Mark this step done</label>
+  <p>The easy stretch. <strong>Knit every round</strong> on the 204 stitches, still on the US 9 long circular, until the sweater measures <strong>24½ inches from the top of the shoulder</strong>. That's the cast-on edge at the point where a shoulder seam would be, straight down to the needle, with the sweater laid flat and unstretched. Total finished length is 27 inches; the last 2½ inches will be ribbing.</p>
+  <p>For a shorter or taller man, knit to <em>2½ inches less than the length he wants</em> instead. The easiest way to decide is to measure a sweater he already likes, from the top of the shoulder to the hem.</p>
+  <h4>Hem ribbing</h4>
+  <ol class="steps">
+    <li>Change to the <strong>US 6 long circular</strong> (the smaller one). Just start knitting off the old needle onto the new one; after one round all the stitches have moved across. With interchangeable tips, simply swap the US 9 tips for US 6.</li>
+    <li>Work <code>k1, p1</code> around for <strong>2½ inches</strong>. 204 is an even number, so the rib lines up perfectly at the marker every round.</li>
+    <li><strong>Bind off loosely</strong> in rib (knit the knits and purl the purls as you bind off). A tight hem pulls in and looks pinched.</li>
+  </ol>
+  <div class="check"><span class="eyebrow">Length check</span>
+    <div class="row"><span>Stockinette from shoulder<b>24½ in</b></span><span>Rib<b>2½ in</b></span><span>Total<b>27 in</b></span></div>
+  </div>
+</section>
+
+<section id="step7">
+  <div class="sec-head"><span class="stepno">STEP 7</span><h2>Sleeves (make two the same)</h2></div>
+  <label class="stepchk"><input type="checkbox" data-step="step7"> Mark this step done</label>
+  <h4>Pick up the sleeve</h4>
+  <ol class="steps">
+    <li>Slip the 78 held stitches from the scrap yarn onto the <strong>US 9 long circular</strong>. Pull the scrap yarn out once they're all safely on.</li>
+    <li>With the outside of the sweater facing you, join a new strand of yarn at the <strong>right-hand edge of the underarm</strong> (leave a 10-inch tail; you'll use it to close any hole later).</li>
+    <li><strong>Pick up 12 stitches</strong> across the underarm: one in the gap at the corner, one in each of the 10 cast-on stitches, one in the far gap. Place a marker after the <strong>6th</strong> picked-up stitch. That marker is the beginning of the round, right in the middle of the underarm.</li>
+    <li><strong>Set up the magic loop.</strong> 90 stitches won't reach round a long cable, so slide them to the middle of the cable, find the halfway point (45 stitches, roughly the top of the shoulder) and pull a loop of cable out there. You now have 45 stitches on each tip. Knit the half on the front tip, turn, pull the cable through, knit the other half; that's one round. Keep working this way all the way to the cuff; the loop just gets longer as the sleeve narrows.</li>
+  </ol>
+  <div class="check"><span class="eyebrow">Stitch check</span>
+    <div class="row"><span>Held sleeve stitches<b>78</b></span><span>Picked up<b>12</b></span><span>Sleeve total<b>90</b></span></div>
+  </div>
+  <h4>Shape the sleeve</h4>
+  <ol class="steps">
+    <li>Knit <strong>3 rounds</strong> plain.</li>
+    <li><strong>Decrease round:</strong> k1, ssk, knit until 3 stitches remain before the marker, k2tog, k1. (2 stitches removed.)</li>
+    <li>Knit 1 round plain.</li>
+    <li>Repeat the decrease round and plain round <strong>3 more times</strong>. You've now done 4 decrease rounds; 82 stitches. This quick run of decreases takes the fullness out of the underarm.</li>
+    <li>From here, work the decrease round <strong>every 5th round</strong>: 4 plain rounds, then a decrease round, and repeat.</li>
+        <li>Continue until the sleeve measures <strong>17 inches from the underarm</strong>, or, better, <strong>until it reaches the wearer's wrist bone when tried on</strong>. The cuff adds 2½ inches beyond that.</li>
+  </ol>
+  <div class="tw"><table>
+    <tr><th>Round</th><th>What happens</th><th class="n">Sts after</th></tr>
+    <tr><td class="n">1–3</td><td>plain</td><td class="n">90</td></tr>
+    <tr><td class="n">4, 6, 8, 10</td><td>decrease rounds (plain round between)</td><td class="n">82</td></tr>
+    <tr><td class="n">15, 20, 25 …</td><td>decrease every 5th round</td><td class="n">80, 78, 76 …</td></tr>
+    <tr><td class="n">≈ 100</td><td>≈17 in reached (at 6 rounds/in)</td><td class="n">≈ 46</td></tr>
+  </table></div>
+  <p>At around 6 rounds per inch you'll fit about 18 more decrease rounds before 17 inches, leaving roughly <strong>46 stitches</strong>. Your row gauge will vary this by a few stitches, and that's fine: the next step evens it out.</p>
+  <h4>Cuff</h4>
+  <ol class="steps">
+    <li><strong>Decrease evenly to 44 stitches</strong> on the next round:
+      <ul>
+        <li>46 sts: <code>(k21, k2tog) × 2</code></li>
+        <li>48 sts: <code>(k10, k2tog) × 4</code></li>
+        <li>50 sts: <code>(k6, k2tog) × 6</code>, then k2</li>
+        <li>Fewer than 46? Stop the 5th-round decreases a little earlier next sleeve; for this one, 44 or 42 sts are both fine for a cuff.</li>
+      </ul>
+    </li>
+    <li>Change to the <strong>US 6 long circular</strong> (or swap to US 6 tips), still working magic loop.</li>
+    <li>Work <code>k1, p1</code> rib for <strong>2½ inches</strong>.</li>
+    <li>Bind off loosely in rib.</li>
+  </ol>
+  <p><strong>Second sleeve:</strong> write down the round you were on for every decrease and the total rounds knitted. Repeat it exactly so the sleeves match.</p>
+  <div class="note">
+    <span class="eyebrow">Adjusting sleeve length</span>
+    <p>The "every 5th round" spacing is what gets a Large from 82 stitches at the upper arm to the cuff in 17 inches. For <strong>shorter arms</strong>, decrease every 4th round so the taper finishes sooner; for <strong>longer arms</strong>, every 6th round. Try the sleeve on the wearer partway down; the sweater will hang a little differently on a body than on a table.</p>
+  </div>
+</section>
+
+<section id="step8">
+  <div class="sec-head"><span class="stepno">STEP 8</span><h2>Neckband</h2></div>
+  <label class="stepchk"><input type="checkbox" data-step="step8"> Mark this step done</label>
+  <p>Pick one of two finishes. The <strong>ribbed crew neck</strong> is what's in the photo and is the more classic men's finish; the <strong>roll collar</strong> is even easier.</p>
+  <p>Either way, use the <strong>US 6 long circular</strong> with magic loop, with the outside of the sweater facing you. Start at the <strong>right-hand back raglan line</strong> (the one to the wearer's right, between back and right sleeve). Join the yarn there and pick up stitches around the neck in this order:</p>
+  <div class="tw"><table>
+    <tr><th>Edge</th><th class="n">Pick up</th><th>Tip</th></tr>
+    <tr><td>Across the back of the neck</td><td class="n">27</td><td>one in each cast-on stitch</td></tr>
+    <tr><td>Across the top of the left sleeve</td><td class="n">15</td><td>one in each cast-on stitch</td></tr>
+    <tr><td>Down the left side of the front neck</td><td class="n">8</td><td>one stitch in from the edge, skip about every 4th row</td></tr>
+    <tr><td>Across the front neck</td><td class="n">13</td><td>one in each cast-on stitch</td></tr>
+    <tr><td>Up the right side of the front neck</td><td class="n">8</td><td>mirror the left side</td></tr>
+    <tr><td>Across the top of the right sleeve</td><td class="n">15</td><td>one in each cast-on stitch</td></tr>
+    <tr class="hl"><td>Total</td><td class="n">86</td><td>an even number, so 1 × 1 rib meets neatly</td></tr>
+  </table></div>
+  <p>Place a marker and join into the round.</p>
+  <h4>Option A: ribbed crew neck</h4>
+  <p>Work <code>k1, p1</code> rib for <strong>1½ inches</strong>. <strong>Bind off very loosely</strong> in rib. This edge must stretch over a head: bind off with a needle two or three sizes larger, or use a stretchy bind-off. Test by pulling the neck open to about 24 inches around; it should get there without strain.</p>
+  <h4>Option B: roll collar</h4>
+  <p>Knit every round for <strong>3¼ inches</strong>, then bind off very loosely. Stockinette curls naturally, so the collar rolls over on itself and shows its purl side, hiding the bound-off edge.</p>
+  <div class="check"><span class="eyebrow">Stitch check</span>
+    <div class="row"><span>Neckband stitches<b>86</b></span><span>Rib height<b>1½ in</b></span><span>or roll collar<b>3¼ in</b></span></div>
+  </div>
+</section>
+
+<section id="step9">
+  <div class="sec-head"><span class="stepno">STEP 9</span><h2>Finishing</h2></div>
+  <label class="stepchk"><input type="checkbox" data-step="step9"> Mark this step done</label>
+  <ol class="steps">
+    <li><strong>Close the underarm gaps.</strong> Turn the sweater inside out. Wherever a small hole shows at the corner of an underarm, use the yarn tail you left there to sew it shut with a couple of stitches through both layers.</li>
+    <li><strong>Weave in every end.</strong> Thread each tail on the darning needle and run it diagonally through the purl bumps on the inside for about 3 inches, then back the other way for an inch. Trim, leaving a ½-inch stub that will disappear into the fabric.</li>
+    <li><strong>Wet block.</strong> Soak the sweater in cool water with a little wool wash for 20 minutes. Press out the water (never wring), roll it in a towel and stand on the roll, then lay it flat on a dry towel. Gently pat it to the finished measurements: 25 inches across the chest (half of 50), 27 inches long, sleeves smooth and straight. Leave it to dry fully, a day or two.</li>
+  </ol>
+  <p>Blocking is the step that turns "hand-knit" into "hand-made". Uneven stitches settle, the raglan lines straighten and the ribbing sits flat.</p>
+</section>
+
+<section id="fit">
+  <div class="sec-head"><h2>Fit adjustments</h2></div>
+  <p>The pattern is drafted for a man of average height. Everything about <em>width</em> is fixed by the size you chose; <em>length</em> is entirely in your hands, and the top-down construction means you can try on as you go.</p>
+  <div class="tw"><table>
+    <tr><th>Wearer is…</th><th>Body</th><th>Sleeves</th></tr>
+    <tr><td>Shorter than average</td><td>Knit the body to 2½ in less than his preferred sweater length (say 22–23 in before ribbing instead of 24½)</td><td>Decrease every <strong>4th</strong> round; stop when the sleeve reaches the wrist bone</td></tr>
+    <tr><td>Average</td><td>24½ in, then rib</td><td>Decrease every 5th round; 17 in, then rib</td></tr>
+    <tr><td>Taller than average</td><td>Knit to 26 in or more before ribbing; budget an extra 50 yards of yarn per inch added</td><td>Decrease every <strong>6th</strong> round; keep going until the wrist bone</td></tr>
+  </table></div>
+  <p>Length changes only affect how much yarn you need; width changes need a different size. If in doubt, buy the extra skein.</p>
+</section>
+
+<section id="trouble">
+  <div class="sec-head"><h2>Troubleshooting</h2></div>
+  <dl class="gloss">
+    <dt>My stitch count is off by 2 after an increase round.</dt>
+    <dd>You missed one marker (or the edge stitch, while working flat). Don't rip back. On the next increase round, add an extra kfb at the marker that's short. Check which section is low against the tables above.</dd>
+    <dt>The join twisted and I've knitted several rounds.</dt>
+    <dd>Unfortunately there's no fix but ripping back to the join. Take heart: this happens to everyone once. It's only a few rounds of the front neck.</dd>
+    <dt>There's a hole at each underarm.</dt>
+    <dd>Normal. Picking up the extra stitch in each corner gap (Step 7) shrinks it; the yarn tail closes the rest (Step 9).</dd>
+    <dt>The neck won't go over his head.</dt>
+    <dd>The bind-off is too tight. Undo just the bind-off row (it unravels easily from the end), put the stitches back on the needle, and bind off again with a needle three sizes larger.</dd>
+    <dt>I can see a loose vertical column on the sleeves where the magic loop cable comes out.</dt>
+    <dd>Pull the first two stitches on each tip snug after every turn, and every few rounds move the loop point by a few stitches so it doesn't fall in the same column. Ladders also mostly vanish with blocking.</dd>
+    <dt>I lost count of rounds in the yoke.</dt>
+    <dd>Count the back stitches instead. Back = 37 + 2 × increase rounds, so 67 back stitches means 15 increase rounds done. Count the purl bumps along a raglan line to confirm: one bump per increase round.</dd>
+    <dt>The sweater looks narrower than 50 inches on the needle.</dt>
+    <dd>It's scrunched up on the cable. Trust the stitch count and your gauge swatch; measure only after blocking.</dd>
+    <dt>I'm running low on yarn.</dt>
+    <dd>Stop and buy more before the second sleeve. If the shop has no matching dye lot, use the new lot for both cuffs and the neckband, where a slight shade change reads as intentional.</dd>
+  </dl>
+</section>
+
+<section id="card">
+  <div class="sec-head"><h2>Reference card</h2></div>
+  <p>Everything for size Large on one page. Print this section and keep it in the project bag.</p>
+  <div class="card">
+    <h3>Neckdown Pullover · Size Large</h3>
+    <h4>Materials</h4>
+    <div class="grid">
+      <div><span>Yarn (worsted/aran)</span><b>1,260 yd + 1 skein</b></div>
+      <div><span>Gauge, stockinette</span><b>16 sts = 4 in</b></div>
+      <div><span>Stockinette needle</span><b>US 9 · 32–40 in circular</b></div>
+      <div><span>Rib needle</span><b>US 6 · 32–40 in circular</b></div>
+      <div><span>Method</span><b>magic loop for sleeves &amp; neck</b></div>
+    </div>
+    <h4>Yoke</h4>
+    <div class="grid">
+      <div><span>Cast on</span><b>2 · 15 · 27 · 15 · 2 = 61</b></div>
+      <div><span>Flat increase rows</span><b>5 (rows 1,3,5,7,9)</b></div>
+      <div><span>Back after flat rows</span><b>37</b></div>
+      <div><span>Cast on for front neck</span><b>13 → 124 sts</b></div>
+      <div><span>Increase rounds in the round</span><b>27 (alt. plain)</b></div>
+      <div><span>Stop when back =</span><b>91 sts</b></div>
+      <div><span>Yoke total at divide</span><b>340 sts</b></div>
+      <div><span>Yoke depth</span><b>≈10–11 in</b></div>
+    </div>
+    <h4>Divide &amp; body</h4>
+    <div class="grid">
+      <div><span>Each sleeve on hold</span><b>78 sts</b></div>
+      <div><span>Underarm cast on</span><b>10 sts each</b></div>
+      <div><span>Body</span><b>204 sts</b></div>
+      <div><span>Knit to (from shoulder)</span><b>24½ in</b></div>
+      <div><span>Hem rib, US 6</span><b>k1 p1 · 2½ in</b></div>
+    </div>
+    <h4>Sleeves</h4>
+    <div class="grid">
+      <div><span>Pick up at underarm</span><b>12 (marker after 6)</b></div>
+      <div><span>Start</span><b>90 sts</b></div>
+      <div><span>Knit plain</span><b>3 rounds</b></div>
+      <div><span>Decrease every 2nd round</span><b>4 times → 82</b></div>
+      <div><span>Then decrease every</span><b>5th round</b></div>
+      <div><span>Until (from underarm)</span><b>17 in / wrist bone</b></div>
+      <div><span>Decrease evenly to</span><b>44 sts</b></div>
+      <div><span>Cuff rib, US 6</span><b>k1 p1 · 2½ in</b></div>
+    </div>
+    <h4>Neckband, US 6, magic loop</h4>
+    <div class="grid">
+      <div><span>Pick up</span><b>27 · 15 · 8 · 13 · 8 · 15 = 86</b></div>
+      <div><span>Rib crew neck</span><b>k1 p1 · 1½ in</b></div>
+      <div><span>or roll collar</span><b>knit · 3¼ in</b></div>
+      <div><span>Bind off</span><b>very loosely</b></div>
+    </div>
+    <h4>Decrease round (sleeves)</h4>
+    <p class="mono" style="margin:0;font-size:.9rem">k1, ssk, knit to 3 sts before marker, k2tog, k1</p>
+  </div>
+</section>
+
+<footer class="colophon">
+  <p>This guide is a beginner's expansion of <em>Knitting Pure &amp; Simple</em> pattern #991, "Neckdown Pullover for Men", with all numbers extracted for the third (Large) size. The original pattern remains the copyright of its publisher; use this alongside your own copy. Stitch counts were worked from the pattern's cast-on and increase instructions; round-count estimates assume about 6 rounds per inch and will vary with your yarn.</p>
+</footer>
+</main>
+</div>
+
+<script>
+(function(){
+  var key='neckdown-large-steps';
+  var state={};
+  try{state=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch(e){state={};}
+  var boxes=document.querySelectorAll('input[data-step]');
+  for(var i=0;i<boxes.length;i++){
+    var b=boxes[i], id=b.getAttribute('data-step'), sec=document.getElementById(id);
+    b.checked=!!state[id];
+    if(sec&&b.checked)sec.classList.add('done');
+    b.addEventListener('change',function(ev){
+      var el=ev.target, sid=el.getAttribute('data-step'), s=document.getElementById(sid);
+      state[sid]=el.checked;
+      if(s)s.classList.toggle('done',el.checked);
+      try{localStorage.setItem(key,JSON.stringify(state));}catch(e){}
+    });
+  }
+})();
+</script>
+</body>
+</html>
